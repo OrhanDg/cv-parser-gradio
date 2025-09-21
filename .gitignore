@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Envs
+.venv/
+venv/
+
+# Secrets
+.env
+.ncv
+secrets.json
+
+# Outputs
+outputs/
+*.json
+
+# OS/Editors
+.DS_Store
+*.swp

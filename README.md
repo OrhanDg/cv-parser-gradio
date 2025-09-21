@@ -22,11 +22,15 @@ Parse resumes (PDF/DOCX/DOC/TXT) into strict, schema-aligned JSON using an LLM. 
   - macOS/Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
   - Windows (PowerShell): `irm https://astral.sh/uv/install.ps1 | iex`
 
+Open Your Terminal and Follow the instructions below
+
 ## Setup (uv)
 
 1) Clone and enter
 
 git clone https://github.com/OrhanDg/cv-parser-gradio.git
+
+
 cd cv-parser-gradio
 
 

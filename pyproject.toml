@@ -1,0 +1,41 @@
+[project]
+name = "cv-parser-gradio"
+version = "0.1.0"
+description = "LLM-powered CV parser (PDF/DOCX/DOC/TXT) with Gradio UI and schema-aligned JSON output."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Orhan Dag", email = "dagorhan20@gmail.com" }
+]
+
+# Core runtime dependencies
+dependencies = [
+  "gradio==4.44.1",
+  "openai==1.51.2",
+  "pymupdf==1.24.10",
+  "PyPDF2==3.0.1",
+  "python-docx==1.1.2",
+  "python-dotenv==1.0.1"
+  # If you need legacy .doc support:
+  # "textract==1.6.5"
+]
+
+[project.urls]
+Homepage = "https://github.com/OrhanDg/cv-parser-gradio"
+Repository = "https://github.com/OrhanDg/cv-parser-gradio"
+
+[tool.uv]
+
+# Optional uv settings can go here
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"

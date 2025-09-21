@@ -8,10 +8,10 @@ Parse resumes (PDF/DOCX/DOC/TXT) into strict, schema-aligned JSON using an LLM. 
 
 ## Repo Layout
 
-# project-root/ gradio_app.py    
-# Gradio entrypoint (UI) cv_parser.py      
-# Extraction + LLM structured outputs pyproject.toml    
-# uv/PEP 621 deps (pinned)
+-project-root/ gradio_app.py    
+-Gradio entrypoint (UI) cv_parser.py      
+-Extraction + LLM structured outputs pyproject.toml    
+-uv/PEP 621 deps (pinned)
 
 
 ## Prerequisites

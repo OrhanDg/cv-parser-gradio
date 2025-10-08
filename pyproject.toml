@@ -28,6 +28,12 @@ Repository = "https://github.com/your-username/cv-parser-gradio"
 
 # Optional uv settings can go here
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py311"

@@ -8,7 +8,7 @@ load_dotenv()
 
 import gradio as gr
 
-from cv_parser import extract_text, llm_extract_resume, parse_any_resume_to_json
+from cv_parser_gradio import extract_text, llm_extract_resume, parse_any_resume_to_json
 
 OUTPUT_DIR = Path("outputs")
 OUTPUT_DIR.mkdir(exist_ok=True)

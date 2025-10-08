@@ -1,12 +1,19 @@
 # cv_parser.py
 import os
 import json
+import importlib
 from pathlib import Path
 from typing import Dict
 
 # Third-party libs required at runtime:
 # - PDF: pymupdf (fitz) or PyPDF2
 # - DOCX/DOC: python-docx (and optionally textract for .doc)
+
+# --------- HELPERS ----------
+def _import_or_raise(module: str, install_hint: str):
+    if importlib.util.find_spec(module) is None:
+        raise ImportError(install_hint)
+    return importlib.import_module(module)
 
 # --------- TEXT EXTRACTION ----------
 def extract_text(file_path: str) -> str:
@@ -29,23 +36,18 @@ def extract_text(file_path: str) -> str:
                 return "".join(p.extract_text() or "" for p in reader.pages)
         except ImportError:
             raise ImportError("Install a PDF library: pip install pymupdf or pip install PyPDF2")
-    elif ext in (".docx", ".doc"):
-        # DOCX first
-        try:
-            from docx import Document
-            doc = Document(file_path)
-            text = "\n".join(p.text for p in doc.paragraphs)
-            for table in doc.tables:
-                for row in table.rows:
-                    text += "\n" + "\t".join(cell.text for cell in row.cells)
-            return text
-        except ImportError:
-            # Legacy .doc fallback (optional)
-            try:
-                import textract
-                return textract.process(file_path).decode("utf-8", errors="ignore")
-            except ImportError:
-                raise ImportError("Install: pip install python-docx (and textract for .doc if needed)")
+    elif ext == ".docx":
+        docx_module = _import_or_raise("docx", "Install: pip install python-docx to parse DOCX files.")
+        Document = docx_module.Document
+        doc = Document(file_path)
+        text = "\n".join(p.text for p in doc.paragraphs)
+        for table in doc.tables:
+            for row in table.rows:
+                text += "\n" + "\t".join(cell.text for cell in row.cells)
+        return text
+    elif ext == ".doc":
+        textract = _import_or_raise("textract", "Install: pip install textract to parse legacy .doc files.")
+        return textract.process(file_path).decode("utf-8", errors="ignore")
     elif ext == ".txt":
         # Try common encodings
         for enc in ("utf-8", "latin-1", "cp1252", "iso-8859-1", "utf-16"):
